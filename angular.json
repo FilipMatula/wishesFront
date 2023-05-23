@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "project-slub"
+  "defaultProject": "project-slub",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewType } from './types';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'project-slub';
+  currentPage: ViewType = "Add";
+  wishes: string = '';
+  signature: string = '';
+
+  public goTo(type: ViewType): void {
+    this.currentPage = type;
+    console.log(this.currentPage);
+  }
 }

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/cdd98d2f-0b55-4483-9219-32d18f2025cd/resourceGroups/WeedingApp_group/providers/Microsoft.Web/sites/WeedingApp",
+    "appService.deploySubpath": "dist\\project-slub"
+}
