@@ -58,8 +58,11 @@
           <button pButton label="Wyślij" class="p-button-raised p-button-success" (click)="send()"></button>
         </div>
       </div>
-      <div *ngIf="currentPage === 'ViewAll'" id="view-all-list" class="flex flex-auto flex-column gap-5 pt-3">
-        <app-wish-card *ngFor="let wish of wishes" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [src]="wish.url" [wishes]="wish.wishes" [signature]="wish.signature"></app-wish-card>
+      <div *ngIf="currentPage === 'ViewAll'" id="view-all-list" class="flex flex-auto flex-column gap-5 pt-3 justify-content-center">
+        <span *ngIf="wishes.length === 0; else wishlist" style="text-align: center;">Niestety nic tu jeszcze nie ma :(</span>
+        <ng-template #wishlist>        
+          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [src]="wish.url" [wishes]="wish.wishes" [signature]="wish.signature"></app-wish-card>
+        </ng-template>
       </div>
     </div>
 
