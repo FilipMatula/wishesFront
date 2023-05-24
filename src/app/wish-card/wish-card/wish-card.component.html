@@ -1,1 +1,9 @@
-<p>wish-card works!</p>
+<p-card styleClass="p-card-shadow custom-shadow" [style]="{width: '360px'}">
+    <ng-template *ngIf="src" pTemplate="header">
+        <img alt="Card" [src]="src">
+    </ng-template>
+    <p>{{wishes}}</p>
+    <ng-template pTemplate="footer">
+        <p>{{signature}}</p>
+    </ng-template>
+</p-card>

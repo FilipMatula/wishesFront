@@ -22,3 +22,30 @@
 .no-bottom-margin {
     margin-bottom: 0 !important;
 }
+
+app-wish-card {
+    transition: all 0.35s;
+}
+
+#view-all-list {
+    & > app-wish-card {
+        &:nth-child(6n+1) {
+            transform: scale(0.8, 0.8) rotate(5deg);
+        }
+        &:nth-child(6n+2) {
+            transform: scale(0.8, 0.8) rotate(-4deg);
+        }
+        &:nth-child(6n+3) {
+            transform: scale(0.8, 0.8) rotate(3deg);
+        }
+        &:nth-child(6n+4) {
+            transform: scale(0.8, 0.8) rotate(-5deg);
+        }
+        &:nth-child(6n+5) {
+            transform: scale(0.8, 0.8) rotate(4deg);
+        }
+        &:nth-child(6n+6) {
+            transform: scale(0.8, 0.8) rotate(-3deg);
+        }
+    }
+}
