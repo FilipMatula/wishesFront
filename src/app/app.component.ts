@@ -11,6 +11,7 @@ export class AppComponent {
   wishes: string = '';
   signature: string = '';
   url: any = null;
+  submitted: boolean = false;
 
   public goTo(type: ViewType): void {
     this.currentPage = type;
@@ -20,6 +21,17 @@ export class AppComponent {
   public clear(): void {
     this.wishes = '';
     this.signature = '';
+  }
+
+  public preview(): void {
+    this.submitted = true;
+    if (this.wishes !== '' && this.signature !== '') {
+      this.goTo('Preview');
+    }
+  }
+
+  public send(): void {
+
   }
 
   public onSelectFile(event: any): void {

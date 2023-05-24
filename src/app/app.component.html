@@ -19,7 +19,7 @@
       [disabled]="currentPage === 'ViewAll'"></button>
     </div>
     <div class="pt-3 flex justify-content-center">
-      <div *ngIf="currentPage === 'Add'">
+      <div *ngIf="currentPage === 'Add'" class="flex flex-auto flex-column">
         <div class="grid p-fluid">
           <div class="field col-12 no-bottom-margin flex align-items-center">
             <label class="font-italic no-bottom-margin">Zdjęcie:</label>
@@ -35,20 +35,28 @@
 
           <div class="field col-12 no-bottom-margin">
               <label for="wishes" class="font-italic">Życzenia: (max. 250 znaków)</label>
-              <textarea id="wishes" rows="7" cols="30" pInputTextarea [(ngModel)]="wishes" maxLength="250"></textarea>
+              <textarea id="wishes" rows="7" cols="30" pInputTextarea [(ngModel)]="wishes" maxLength="250" [ngClass]="{'ng-invalid ng-dirty': this.wishes === '' && submitted}"></textarea>
+              <small *ngIf="this.wishes === '' && submitted" id="wishes" class="p-error block">Wpisz proszę życzenia :(</small>
           </div>
           <div class="field col-12 no-bottom-margin">
             <label for="signature" class="font-italic">Podpis: (max. 50 znaków)</label>
-            <textarea id="signature" rows="2" cols="30" pInputTextarea [(ngModel)]="signature" maxLength="50"></textarea>
+            <textarea id="signature" rows="2" cols="30" pInputTextarea [(ngModel)]="signature" maxLength="50" [ngClass]="{'ng-invalid ng-dirty': this.signature === '' && submitted}"></textarea>
+            <small *ngIf="this.signature === '' && submitted" id="signature" class="p-error block">Podpisz się :(</small>
           </div>
         </div>
         <div class="flex flex-auto justify-content-evenly">
           <button pButton label="Wyczyść" class="p-button-raised p-button-danger" (click)="clear()"></button>
-          <button pButton label="Podgląd" class="p-button-raised p-button-success" (click)="goTo('Preview')"></button>
+          <button pButton label="Podgląd" class="p-button-raised p-button-success" (click)="preview()"></button>
         </div>
       </div>
-      <div *ngIf="currentPage === 'Preview'">
-        Preview
+      <div *ngIf="currentPage === 'Preview'" class="flex flex-auto flex-column">
+        <div class="flex flex-auto justify-content-center">
+          <app-wish-card [src]="url" [wishes]="wishes" [signature]="signature"></app-wish-card>
+        </div>
+        <div class="flex flex-auto justify-content-evenly">
+          <button pButton label="Powrót" class="p-button-raised p-button-danger" (click)="goTo('Add')"></button>
+          <button pButton label="Wyślij" class="p-button-raised p-button-success" (click)="send()"></button>
+        </div>
       </div>
       <div *ngIf="currentPage === 'ViewAll'">
         ViewAll

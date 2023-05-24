@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewAllComponent } from './view-all.component';
+import { WishCardComponent } from './wish-card.component';
 
-describe('ViewAllComponent', () => {
-  let component: ViewAllComponent;
-  let fixture: ComponentFixture<ViewAllComponent>;
+describe('WishCardComponent', () => {
+  let component: WishCardComponent;
+  let fixture: ComponentFixture<WishCardComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewAllComponent]
+      declarations: [WishCardComponent]
     });
-    fixture = TestBed.createComponent(ViewAllComponent);
+    fixture = TestBed.createComponent(WishCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
