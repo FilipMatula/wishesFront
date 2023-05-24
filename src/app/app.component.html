@@ -18,16 +18,34 @@
       (click)="goTo('ViewAll')"
       [disabled]="currentPage === 'ViewAll'"></button>
     </div>
-    <div class="pt-3 flex flex-auto justify-content-center">
+    <div class="pt-3 flex justify-content-center">
       <div *ngIf="currentPage === 'Add'">
         <div class="grid p-fluid">
-          <div class="field col-12 md:col-3">
-              <label for="integeronly">Życzenia: (max. 250 znaków)</label>
-              <textarea id="wishes" rows="5" cols="30" pInputTextarea [(ngModel)]="wishes"></textarea>
+          <div class="field col-12 no-bottom-margin flex align-items-center">
+            <label class="font-italic no-bottom-margin">Zdjęcie:</label>
+            <input type="file" id="imageFile" hidden accept="image/*" (change)="onSelectFile($event)" />
+              <button for="imageFile" pButton type="button" icon="pi pi-image" [label]="url ? 'Zmień zdjęcie' : 'Dodaj zdjęcie'" class="p-button-outlined p-button-info ml-3">
+                <label class="upload-button" for="imageFile"></label>
+            </button>
+            <!-- <img [src]="url" *ngIf="url" height="200"> -->
+          </div>
+          <div class="flex flex-auto justify-content-center">
+            <p-image *ngIf="url" [src]="url" alt="Image" [preview]="true" width="250px"></p-image>
+          </div>
+
+          <div class="field col-12 no-bottom-margin">
+              <label for="wishes" class="font-italic">Życzenia: (max. 250 znaków)</label>
+              <textarea id="wishes" rows="7" cols="30" pInputTextarea [(ngModel)]="wishes" maxLength="250"></textarea>
+          </div>
+          <div class="field col-12 no-bottom-margin">
+            <label for="signature" class="font-italic">Podpis: (max. 50 znaków)</label>
+            <textarea id="signature" rows="2" cols="30" pInputTextarea [(ngModel)]="signature" maxLength="50"></textarea>
           </div>
         </div>
-
-        
+        <div class="flex flex-auto justify-content-evenly">
+          <button pButton label="Wyczyść" class="p-button-raised p-button-danger" (click)="clear()"></button>
+          <button pButton label="Podgląd" class="p-button-raised p-button-success" (click)="goTo('Preview')"></button>
+        </div>
       </div>
       <div *ngIf="currentPage === 'Preview'">
         Preview

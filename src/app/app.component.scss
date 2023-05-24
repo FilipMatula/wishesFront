@@ -10,3 +10,15 @@
     line-height: 89px;
     color: var(--green-900);
 }
+
+.upload-button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+.no-bottom-margin {
+    margin-bottom: 0 !important;
+}

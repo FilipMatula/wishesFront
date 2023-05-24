@@ -10,7 +10,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import {ImageModule} from 'primeng/image';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     ButtonModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ImageModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
