@@ -22,6 +22,11 @@ export class AppComponent implements OnInit {
 
   public goTo(type: ViewType): void {
     this.currentPage = type;
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
   public clear(): void {
