@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./wish-card.component.scss']
 })
 export class WishCardComponent {
-  @Input() src: any;
+  @Input() base64Content: any;
   @Input() wishes: string = '';
   @Input() signature: string = '';
 }

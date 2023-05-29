@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {ImageModule} from 'primeng/image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WishCardComponent } from './wish-card/wish-card/wish-card.component';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { WishCardComponent } from './wish-card/wish-card/wish-card.component';
     CardModule,
     InputTextareaModule,
     ImageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

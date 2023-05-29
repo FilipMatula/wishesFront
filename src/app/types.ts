@@ -1,7 +1,7 @@
 export type ViewType = 'Add' | 'Preview' | 'ViewAll'
 
 export interface Wish {
-    wishes: string;
+    wishText: string;
     signature: string;
-    url: any;
+    base64Content: any;
 }

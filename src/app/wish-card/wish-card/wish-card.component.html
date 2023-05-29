@@ -1,6 +1,6 @@
 <p-card styleClass="p-card-shadow custom-shadow" [style]="{width: '360px'}">
-    <ng-template *ngIf="src" pTemplate="header">
-        <img alt="Card" [src]="src">
+    <ng-template *ngIf="base64Content" pTemplate="header">
+        <img alt="Card" [src]="base64Content">
     </ng-template>
     <p>{{wishes}}</p>
     <ng-template pTemplate="footer">

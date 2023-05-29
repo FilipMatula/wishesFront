@@ -24,19 +24,19 @@
           <div class="field col-12 no-bottom-margin flex align-items-center">
             <label class="font-italic no-bottom-margin">Zdjęcie:</label>
             <input type="file" id="imageFile" hidden accept="image/*" (change)="onSelectFile($event)" />
-              <button for="imageFile" pButton type="button" icon="pi pi-image" [label]="newWish.url ? 'Zmień zdjęcie' : 'Dodaj zdjęcie'" class="p-button-outlined p-button-info ml-3">
+              <button for="imageFile" pButton type="button" icon="pi pi-image" [label]="newWish.base64Content ? 'Zmień zdjęcie' : 'Dodaj zdjęcie'" class="p-button-outlined p-button-info ml-3">
                 <label class="upload-button" for="imageFile"></label>
             </button>
             <!-- <img [src]="url" *ngIf="url" height="200"> -->
           </div>
           <div class="flex flex-auto justify-content-center">
-            <p-image *ngIf="newWish.url" [src]="newWish.url" alt="Image" [preview]="true" width="250px"></p-image>
+            <p-image *ngIf="newWish.base64Content" [src]="newWish.base64Content" alt="Image" [preview]="true" width="250px"></p-image>
           </div>
 
           <div class="field col-12 no-bottom-margin">
               <label for="wishes" class="font-italic">Życzenia: (max. 250 znaków)</label>
-              <textarea id="wishes" rows="7" cols="30" pInputTextarea [(ngModel)]="newWish.wishes" maxLength="250" [ngClass]="{'ng-invalid ng-dirty': newWish.wishes === '' && submitted}"></textarea>
-              <small *ngIf="newWish.wishes === '' && submitted" id="wishes" class="p-error block">Wpisz proszę życzenia :(</small>
+              <textarea id="wishes" rows="7" cols="30" pInputTextarea [(ngModel)]="newWish.wishText" maxLength="250" [ngClass]="{'ng-invalid ng-dirty': newWish.wishText === '' && submitted}"></textarea>
+              <small *ngIf="newWish.wishText === '' && submitted" id="wishes" class="p-error block">Wpisz proszę życzenia :(</small>
           </div>
           <div class="field col-12 no-bottom-margin">
             <label for="signature" class="font-italic">Podpis: (max. 50 znaków)</label>
@@ -51,7 +51,7 @@
       </div>
       <div *ngIf="currentPage === 'Preview'" class="flex flex-auto flex-column">
         <div class="flex flex-auto justify-content-center mb-3">
-          <app-wish-card style="display: flex; flex: 1 1 auto !important;justify-content: center;" [src]="newWish.url" [wishes]="newWish.wishes" [signature]="newWish.signature"></app-wish-card>
+          <app-wish-card style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="newWish.base64Content" [wishes]="newWish.wishText" [signature]="newWish.signature"></app-wish-card>
         </div>
         <div class="flex flex-auto justify-content-evenly">
           <button pButton label="Powrót" class="p-button-raised p-button-danger" (click)="goTo('Add')"></button>
@@ -61,7 +61,7 @@
       <div *ngIf="currentPage === 'ViewAll'" id="view-all-list" class="flex flex-auto flex-column gap-5 pt-3 justify-content-center">
         <span *ngIf="wishes.length === 0; else wishlist" style="text-align: center;">Niestety nic tu jeszcze nie ma :(</span>
         <ng-template #wishlist>        
-          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [src]="wish.url" [wishes]="wish.wishes" [signature]="wish.signature"></app-wish-card>
+          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="wish.base64Content" [wishes]="wish.wishText" [signature]="wish.signature"></app-wish-card>
         </ng-template>
       </div>
     </div>
