@@ -56,3 +56,7 @@ body {
 .p-component {
     font-family: inherit;
 }
+
+.p-toast .p-toast-message.p-toast-message-error {
+    background: rgb(253, 194, 194);
+}

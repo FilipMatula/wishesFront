@@ -1,3 +1,10 @@
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loader-content">
+    <p-progressSpinner></p-progressSpinner>
+    <label>Poczekaj chwilę... :)</label>
+  </div>
+</div>
+
 <div class="min-h-screen flex flex-column">
   <div class="title py-1 px-5 flex align-items-center justify-content-center relative lg:static" style="min-height: 80px">
     <span class="title-text">
@@ -61,10 +68,12 @@
       <div *ngIf="currentPage === 'ViewAll'" id="view-all-list" class="flex flex-auto flex-column gap-5 pt-3 justify-content-center">
         <span *ngIf="wishes.length === 0; else wishlist" style="text-align: center;">Niestety nic tu jeszcze nie ma :(</span>
         <ng-template #wishlist>        
-          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="wish.base64Content" [wishes]="wish.wishText" [signature]="wish.signature"></app-wish-card>
+          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="wish.path" [wishes]="wish.wishText" [signature]="wish.signature"></app-wish-card>
         </ng-template>
       </div>
     </div>
 
   </div>
 </div>
+
+<p-toast [baseZIndex]="2000" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>

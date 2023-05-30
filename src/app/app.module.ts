@@ -12,6 +12,10 @@ import {ImageModule} from 'primeng/image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WishCardComponent } from './wish-card/wish-card/wish-card.component';
 import {HttpClientModule} from '@angular/common/http'
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +32,11 @@ import {HttpClientModule} from '@angular/common/http'
     InputTextareaModule,
     ImageModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    ProgressSpinnerModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

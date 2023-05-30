@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewType, Wish } from './types';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs';
+import { Observable, catchError, finalize, tap } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,9 @@ import { tap } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  loading: boolean = false;
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient, private messageService: MessageService){}
 
   ngOnInit(): void {
     this.newWish = {
@@ -29,9 +31,20 @@ export class AppComponent implements OnInit {
   wishes: Wish[] = [];
 
   private fetchWishes(): void {
+    this.loading = true;
     this.httpClient.get<Wish[]>(`${environment.apiUrl}/Wishes`).pipe(tap((data: Wish[]) => {
       this.wishes = data;
-    })).subscribe();
+    }),catchError((error: HttpErrorResponse): Observable<never> => {
+      this.messageService.add({
+        severity: 'error',
+        summary: "Błąd",
+        detail: error.error ? error.error.title ?? 'Wystąpił nieznany błąd :(' : 'Wystąpił nieznany błąd :(',
+        life: 5000,
+      })
+      throw error;
+    }),
+    finalize(() => this.loading = false),
+    ).subscribe();
   }
 
   public goTo(type: ViewType): void {
@@ -58,9 +71,30 @@ export class AppComponent implements OnInit {
   }
 
   public send(): void {
-    this.httpClient.post<void>(`${environment.apiUrl}/Wishes`, this.newWish).subscribe(() => {
+    this.loading = true;
+    this.httpClient.post<void>(`${environment.apiUrl}/Wishes`, this.newWish).pipe(
+      tap(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: "Błąd",
+          detail: 'Dziękujemy! :)',
+          life: 5000,
+          sticky: true
+        })
+      }),
+      catchError((error: HttpErrorResponse): Observable<never> => {
+      this.messageService.add({
+        severity: 'error',
+        summary: "Błąd",
+        detail: error.error ? error.error.title ?? 'Wystąpił nieznany błąd :(' : 'Wystąpił nieznany błąd :(',
+        life: 5000,
+        sticky: true
+      })
+      throw error;
+    }),
+    finalize(() => this.loading = false),
+    ).subscribe(() => {
       this.fetchWishes();
-
       this.clear();
       this.goTo('ViewAll');
     });
