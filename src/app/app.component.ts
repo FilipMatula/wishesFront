@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
       tap(() => {
         this.messageService.add({
           severity: 'success',
-          summary: "Błąd",
+          summary: "Sukces",
           detail: 'Dziękujemy! :)',
           life: 5000,
           sticky: true
