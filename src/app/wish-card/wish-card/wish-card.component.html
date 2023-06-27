@@ -1,9 +1,12 @@
-<p-card styleClass="p-card-shadow custom-shadow" [style]="{width: '360px'}">
-    <ng-template *ngIf="base64Content" pTemplate="header">
-        <img alt="Card" [src]="base64Content">
-    </ng-template>
-    <p>{{wishes}}</p>
-    <ng-template pTemplate="footer">
-        <p>{{signature}}</p>
-    </ng-template>
-</p-card>
+<div #div>
+    <p-card  styleClass="p-card-shadow custom-shadow" [style]="{width: '500px'}">
+        <ng-template *ngIf="base64Content" pTemplate="header">
+            <img crossOrigin="anonymous" alt="Card" [src]="base64Content">
+        </ng-template>
+        <p>{{wishes}}</p>
+        <ng-template pTemplate="footer">
+            <p>{{signature}}</p>
+        </ng-template>
+    </p-card>
+</div>
+

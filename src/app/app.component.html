@@ -13,6 +13,13 @@
 
   </div>
   <div class="py-3 px-4 flex flex-column flex-auto">
+    <button pButton (click)="download()">Download</button>
+
+    <div id="download">
+      <img #canvas>
+      <a #downloadLink></a>
+    </div>
+
     <div class="flex justify-content-evenly">    
       <button pButton label="Dodaj życzenia" class="p-button-secondary" 
       [ngClass]="{'p-button-raised' : (currentPage === 'Add' || currentPage === 'Preview')}" 
@@ -67,8 +74,8 @@
       </div>
       <div *ngIf="currentPage === 'ViewAll'" id="view-all-list" class="flex flex-auto flex-column gap-5 pt-3 justify-content-center">
         <span *ngIf="wishes.length === 0; else wishlist" style="text-align: center;">Niestety nic tu jeszcze nie ma :(</span>
-        <ng-template #wishlist>        
-          <app-wish-card *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="wish.path" [wishes]="wish.wishText" [signature]="wish.signature"></app-wish-card>
+        <ng-template #wishlist>
+            <app-wish-card #wishCard *ngFor="let wish of wishes.slice().reverse()" style="display: flex; flex: 1 1 auto !important;justify-content: center;" [base64Content]="wish.path" [wishes]="wish.wishText" [signature]="wish.signature"></app-wish-card>      
         </ng-template>
       </div>
     </div>

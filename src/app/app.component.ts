@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ViewType, Wish } from './types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, finalize, tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import html2canvas from 'html2canvas';
+import { WishCardComponent } from './wish-card/wish-card/wish-card.component';
+import * as htmlToImage from 'html-to-image';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,10 @@ import { MessageService } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
   loading: boolean = false;
+
+  @ViewChildren('wishCard') wishCards: QueryList<WishCardComponent>;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
 
   constructor(private httpClient: HttpClient, private messageService: MessageService){}
 
@@ -68,6 +75,31 @@ export class AppComponent implements OnInit {
     if (this.newWish.wishText !== '' && this.newWish.signature !== '') {
       this.goTo('Preview');
     }
+  }
+
+  public download(): void {
+    console.log(this.wishCards);
+    this.wishCards.forEach((wishCard: WishCardComponent) => {
+
+      htmlToImage.toPng(wishCard.getElement().nativeElement, {})
+      .then((dataUrl) => {
+        this.canvas.nativeElement.src = dataUrl;
+        this.downloadLink.nativeElement.href = dataUrl;
+        this.downloadLink.nativeElement.download = wishCard.signature;
+        this.downloadLink.nativeElement.click();
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+      });
+
+  //     html2canvas(wishCard.getElement().nativeElement, {useCORS: true, allowTaint : true}).then(canvas => {
+  //       this.canvas.nativeElement.src = canvas.toDataURL();
+  //       this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+  //       this.downloadLink.nativeElement.download = 'marble-diagram.png';
+  //       this.downloadLink.nativeElement.click();
+  // });
+    });
+
   }
 
   public send(): void {
